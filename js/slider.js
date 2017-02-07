@@ -39,15 +39,14 @@ function HNDSMSlider(settings) {
     };
 
     var onSlideComplete = function (slider, slide) {
-
-
-        slider.nextSlide = slider.currentSlide;
-        slider.currentSlide++;
-        if (slider.currentSlide == slider.slides.length) {
-            slider.currentSlide = 0;
-        }
         TweenLite.set(slide, {y: slider.slideHeight});
         slider.timerFunction.restart(true);
+        slider.currentSlide = slider.nextSlide;
+        slider.nextSlide++;
+
+        if (slider.nextSlide == slider.slides.length) {
+            slider.nextSlide = 0;
+        }
     };
 }
 

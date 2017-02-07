@@ -28,33 +28,61 @@ footer {
     position: absolute;
     top: 0;
     left: 0;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    /*padding: 10px;*/
+    -webkit-perspective: 3000px;
+    perspective: 3000px;
+    overflow: hidden;
 }
 
-
-.sl1 {
-    background: url('/parallax-slider/img/slider_silvercar_optimized.jpg') no-repeat center center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+/*===========================*/
+.parallax-content {
+    flex: none;
+    width: 110%;
+    position: relative;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translateZ(50px) translateZ(0);
+    transform: translateZ(50px) translateZ(0);
+    -webkit-transition: visibility 0.2s ease, opacity 0.2s ease;
+    transition: visibility 0.2s ease, opacity 0.2s ease;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    /* fixes a Firefox bug - images not correctly rendered*/
+    background-color: rgba(255, 255, 255, 0.01);
 }
 
-.sl2 {
-    background: url('/parallax-slider/img/slider_eventurist_optimized.jpg') no-repeat center center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+.slide img {
+    max-width: 100%;
+    display: flex;
 }
 
-.sl3 {
-    background: url('/parallax-slider/img/slider_yousciencefull_optimized.jpg') no-repeat center center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+.parallax-background {
+    position: relative;
+    top: 0;
+    left: 0;
 }
-
+.parallax-background-main {
+    position: absolute;
+}
+.no-preserve-3d .parallax-background-mail {
+    display: none;
+}
+.parallax-background-light {
+    position: absolute;
+}
+.no-preserve-3d .parallax-background-light {
+    display: none;
+}
+.parallax-background-mask {
+    position: relative;
+}
+.no-preserve-3d .parallax-background-mask {
+    position: relative;
+}
+/*================================*/
 
 
 @media (orientation : portrait) {
