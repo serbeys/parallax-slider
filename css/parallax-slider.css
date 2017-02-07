@@ -1,0 +1,71 @@
+body {
+    margin: 0;
+}
+
+header {
+    background-color: antiquewhite;
+    height: 100px;
+}
+
+footer {
+    background-color: blueviolet;
+    height: 100px;
+}
+
+.parallax-slider {
+    /*todo: find old browsers solution*/
+    height:-moz-calc(100vh - 100px);
+    height:-webkit-calc(100vh - 100px);
+    background-color: aquamarine;
+    overflow: hidden;
+    position: relative;
+}
+
+.slide {
+    height:-moz-calc(100vh - 100px);
+    height:-webkit-calc(100vh - 100px);
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+.sl1 {
+    background: url('/parallax-slider/img/slider_silvercar_optimized.jpg') no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.sl2 {
+    background: url('/parallax-slider/img/slider_eventurist_optimized.jpg') no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.sl3 {
+    background: url('/parallax-slider/img/slider_yousciencefull_optimized.jpg') no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+
+
+@media (orientation : portrait) {
+    .parallax-slider {
+        /*todo: find olb browsers solution*/
+        height:56vw;
+    }
+
+    .slide {
+        /*todo: find olb browsers solution*/
+        height:56vw;
+    }
+
+}
