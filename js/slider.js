@@ -27,6 +27,10 @@ function HNDSMSlider(settings) {
     this.start = function () {
         TweenLite.set(this.slides, isFirefox() ? {top: this.slideHeight} : {y: this.slideHeight});
         TweenLite.set(this.slides[this.settings.startSlide], isFirefox() ? {top: 0} : {y: 0});
+        // todo: rewrite to existing titles
+        var title = slider.slides[this.settings.startSlide].getElementsByTagName("a");
+        TweenLite.to(title, 1, {opacity: 1, margin: 0, delay: 1});
+
         this.timerFunction = TweenLite.delayedCall(this.settings.pause, changeSlide, [this]);
     };
 
@@ -43,6 +47,8 @@ function HNDSMSlider(settings) {
 
 
     var changeSlide = function (slider) {
+        var title = slider.slides[slider.nextSlide].getElementsByTagName("a");
+        TweenLite.to(title, 1, {opacity: 1, margin: 0, delay: 1});
 
         TweenLite.to(slider.slides[slider.currentSlide], slider.settings.duration, {
             css: isFirefox() ? {top: -(slider.slideHeight)} : {y: -(slider.slideHeight)},
@@ -54,11 +60,14 @@ function HNDSMSlider(settings) {
         TweenLite.to(slider.slides[slider.nextSlide], slider.settings.duration, {
             css: isFirefox() ? {top: 0} : {y: 0},
             ease: slider.settings.easing
-        })
+        });
+
     };
 
     var onSlideComplete = function (slider, slide) {
         TweenLite.set(slide, isFirefox() ? {top: slider.slideHeight} : {y: slider.slideHeight});
+        TweenLite.set(slide.getElementsByTagName("a"), {clearProps:"all"});
+        console.log(slide.getElementsByTagName("a"));
         slider.timerFunction.restart(true);
         slider.currentSlide = slider.nextSlide;
         slider.nextSlide++;

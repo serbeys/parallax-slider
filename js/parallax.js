@@ -1,4 +1,5 @@
 jQuery(document).ready(function ($) {
+
     function supports3d() {
         if (!window.getComputedStyle) {
             return false;

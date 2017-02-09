@@ -97,3 +97,42 @@ footer {
     }
 
 }
+
+
+/*==================*/
+.casestudy-cta {
+    display: block;
+    position: absolute;
+    z-index: 1350;
+    top: 47%;
+    width: 600px;
+    left: 5%;
+    padding: 50px 0;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translateZ(70px) translateZ(0);
+    transform: translateZ(70px) translateZ(0);
+    /*transition: opacity 700ms ease, margin 700ms ease;*/
+}
+
+.casestudy-cta h3 {
+    font-size: 46px;
+    line-height: 1.25;
+    margin-bottom: 12px;
+    color: #fff;
+    font-weight: 400;
+    display: block;
+}
+/*Hard-code!!! just for example*/
+a {
+    margin-top: 120px;
+    opacity: 0;
+    outline: 0;
+    border: none;
+    /*transition: color .3s ease;*/
+    color: #5b5b5b;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
