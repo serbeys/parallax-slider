@@ -44,8 +44,8 @@ footer {
     position: relative;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
-    -webkit-transform: translateZ(50px) translateZ(0);
-    transform: translateZ(50px) translateZ(0);
+    -webkit-transform: translateZ(0px) translateZ(0);
+    transform: translateZ(0px) translateZ(0);
     -webkit-transition: visibility 0.2s ease, opacity 0.2s ease;
     transition: visibility 0.2s ease, opacity 0.2s ease;
     -webkit-backface-visibility: hidden;
@@ -66,18 +66,24 @@ footer {
 }
 .parallax-background-main {
     position: absolute;
+    -webkit-transform: translateZ(0px) translateZ(0);
+    transform: translateZ(0px) translateZ(0);
 }
 .no-preserve-3d .parallax-background-mail {
     display: none;
 }
 .parallax-background-light {
     position: absolute;
+    -webkit-transform: translateZ(1px) translateZ(0);
+    transform: translateZ(1px) translateZ(0);
 }
 .no-preserve-3d .parallax-background-light {
     display: none;
 }
 .parallax-background-mask {
     position: relative;
+    -webkit-transform: translateZ(2px) translateZ(0);
+    transform: translateZ(2px) translateZ(0);
 }
 .no-preserve-3d .parallax-background-mask {
     position: relative;
@@ -110,8 +116,8 @@ footer {
     padding: 50px 0;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
-    -webkit-transform: translateZ(70px) translateZ(0);
-    transform: translateZ(70px) translateZ(0);
+    -webkit-transform: translateZ(150px) translateZ(0);
+    transform: translateZ(150px) translateZ(0);
     /*transition: opacity 700ms ease, margin 700ms ease;*/
 }
 
