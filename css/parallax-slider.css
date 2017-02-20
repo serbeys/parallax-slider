@@ -16,18 +16,19 @@ footer {
     /*todo: find old browsers solution*/
     height:-moz-calc(100vh - 100px);
     height:-webkit-calc(100vh - 100px);
-    background-color: aquamarine;
+    /*background-color: aquamarine;*/
     overflow: hidden;
     position: relative;
 }
 
 .slide {
+    left: 2%;
     height:-moz-calc(100vh - 100px);
     height:-webkit-calc(100vh - 100px);
-    width: 100%;
+    width: 96%;
     position: absolute;
     top: 0;
-    left: 0;
+    /*left: 0;*/
     display:flex;
     align-items: center;
     justify-content: center;
@@ -36,6 +37,37 @@ footer {
     perspective: 3000px;
     overflow: hidden;
 }
+
+.slide-nav {
+    position: absolute;
+    top: 50%;
+    right: 2%;
+    width: 50px;
+    margin-top: -50px;
+
+}
+
+.slide-nav ul {
+    list-style: none;
+    background-color: #ffffff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.slide-nav li {
+    height: 50px;
+}
+#slide-up:hover {
+    /*background-color: #f8f8f8;*/
+    background-color: #f8f8f8;
+}
+
+#slide-down:hover {
+    background-color: #f8f8f8;
+}
+
+
 
 /*===========================*/
 .parallax-content {
@@ -92,14 +124,58 @@ footer {
 
 
 @media (orientation : portrait) {
+
+    html, body {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    #Body {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch;
+        /*overflow-y: scroll;*/
+    }
+
+    .slide-nav {
+        width: 100px;
+        margin-top: -100px;
+
+    }
+
+    .slide-nav li {
+        height: 100px;
+    }
+
     .parallax-slider {
         /*todo: find olb browsers solution*/
-        height:56vw;
+        height:-moz-calc(100vh - 100px);
+        height:-webkit-calc(100vh - 100px);
+        height:calc(100vh - 100px);
+
+    }
+    .parallax-content {
+        width: auto;
+        align-items: center;
+        justify-content: center;
     }
 
     .slide {
         /*todo: find olb browsers solution*/
-        height:56vw;
+        height:-moz-calc(100vh - 100px);
+        height:-webkit-calc(100vh - 100px);
+        height:calc(100vh - 100px);
+        align-items: center;
+        justify-content: center;
+    }
+    .slide img {
+        max-height: 120%;
+
     }
 
 }

@@ -16,6 +16,8 @@ var slider;
             new ParallaxEffect(slider).init();
         }
     );
+
+
     window.addEventListener('resize', function () {
         slider.changeHeight();
         new ParallaxEffect(slider).init();
@@ -28,22 +30,30 @@ var slider;
         self.settings = settings;
         self.currentSlide = settings.startSlide;
         self.nextSlide = self.currentSlide + 1;
+        self.prevSlide = self.nextSlide + 1;
         self.slides = document.getElementsByClassName(settings.className);
         self.slideHeight = this.slides[settings.startSlide].offsetHeight;
 
         self.start = function () {
-            TweenLite.set(self.slides, isFirefox() ? {top: self.slideHeight} : {y: self.slideHeight});
-            TweenLite.set(self.slides[self.settings.startSlide], isFirefox() ? {top: 0} : {y: 0});
+            TweenLite.set(self.slides[self.prevSlide], isFirefox() ? {top: -self.slideHeight} : {y: -self.slideHeight});
+            TweenLite.set(self.slides[self.currentSlide], isFirefox() ? {top: 0} : {y: 0});
+            TweenLite.set(self.slides[self.nextSlide], isFirefox() ? {top: self.slideHeight} : {y: self.slideHeight});
+
             // todo: rewrite to existing titles
-            var title = slider.slides[self.settings.startSlide].getElementsByTagName('a');
+            var title = slider.slides[self.currentSlide].getElementsByTagName('a');
             TweenLite.to(title, 1, {opacity: 1, margin: 0, delay: 1});
 
-            self.timerFunction = TweenLite.delayedCall(self.settings.pause, changeSlide, [self]);
+            document.getElementById("slide-down").addEventListener("click", function () {
+                TweenLite.delayedCall(0, changeSlide, [self, "down"]);
+            });
+
+            document.getElementById("slide-up").addEventListener("click", function () {
+                TweenLite.delayedCall(0, changeSlide, [self, "up"]);
+            });
         };
 
         self.changeHeight = function () {
             self.currentSlide = self.settings.startSlide;
-            self.nextSlide = self.currentSlide + 1;
             self.slideHeight = self.slides[settings.startSlide].offsetHeight;
             self.start();
         };
@@ -57,35 +67,53 @@ var slider;
         };
 
 
-        var changeSlide = function (slider) {
-            var title = slider.slides[slider.nextSlide].getElementsByTagName('a');
+        var changeSlide = function (slider, direction) {
+            var movingSlide = slider.prevSlide;
+            var directionIndex = 1;
+
+            if (direction === "up") {
+                movingSlide = slider.nextSlide;
+                directionIndex = -1;
+            }
+
+
+            var title = slider.slides[movingSlide].getElementsByTagName('a');
             TweenLite.to(title, 1, {opacity: 1, margin: 0, delay: 1});
 
             TweenLite.to(slider.slides[slider.currentSlide], slider.settings.duration, {
-                css: isFirefox() ? {top: -(slider.slideHeight)} : {y: -(slider.slideHeight)},
+                css: isFirefox() ? {top: directionIndex * (slider.slideHeight)} : {y: directionIndex * (slider.slideHeight)},
                 onComplete: onSlideComplete,
-                onCompleteParams: [slider, slider.slides[slider.currentSlide]],
+                onCompleteParams: [slider, movingSlide],
                 ease: slider.settings.easing
             });
 
-            TweenLite.to(slider.slides[slider.nextSlide], slider.settings.duration, {
+            TweenLite.to(slider.slides[movingSlide], slider.settings.duration, {
                 css: isFirefox() ? {top: 0} : {y: 0},
                 ease: slider.settings.easing
             });
 
+
         };
 
-        var onSlideComplete = function (slider, slide) {
-            TweenLite.set(slide, isFirefox() ? {top: slider.slideHeight} : {y: slider.slideHeight});
+        var onSlideComplete = function (slider, movingSlide) {
+            var slide = slider.slides[slider.currentSlide];
             TweenLite.set(slide.getElementsByTagName('a'), {clearProps: 'all'});
             console.log(slide.getElementsByTagName('a'));
-            slider.timerFunction.restart(true);
-            slider.currentSlide = slider.nextSlide;
-            slider.nextSlide++;
+            slider.currentSlide = movingSlide;
+            slider.nextSlide = movingSlide + 1;
+            slider.prevSlide = movingSlide - 1;
+
 
             if (slider.nextSlide === slider.slides.length) {
                 slider.nextSlide = 0;
             }
+            if (slider.prevSlide < 0) {
+                slider.prevSlide = slider.slides.length - 1;
+            }
+            console.log(slider.prevSlide,slider.currentSlide, slider.nextSlide);
+            TweenLite.set(slider.slides[slider.prevSlide], isFirefox() ? {top: -slider.slideHeight} : {y: -slider.slideHeight});
+            TweenLite.set(slider.slides[slider.nextSlide], isFirefox() ? {top: slider.slideHeight} : {y: slider.slideHeight});
+
         };
     }
 
@@ -132,14 +160,14 @@ var slider;
                 },
                 ease: Power1.easeOut,
                 transformOrigin: 'center',
-                force3D:true
+                force3D: true
             });
             TweenLite.to(light, 1, {
                 css: {
                     y: -yPos / 10,
                     x: -xPos / 10
                 },
-                force3D:true
+                force3D: true
             });
 
 
@@ -179,7 +207,7 @@ var slider;
                     y: rotateX * 2 + 'px',
                     x: rotateY * 8 + 'px'
                 },
-                force3D:true
+                force3D: true
             });
 
         };
